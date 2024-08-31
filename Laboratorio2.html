@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de JavaScript</title>
+</head>
+<body>
+    <h1>¿Qué es JavaScript y en qué se asemeja a Java?</h1>
+    <p>
+        JavaScript es un lenguaje de programación interpretado, dialecto del estándar ECMAScript. Se define como orientado a objetos, 
+        ​ basado en prototipos, imperativo, débilmente tipado y dinámico
+    </p>
+
+    <h2>Calculadora</h2>
+    <p>Elige la operación:</p>
+    <select id="operacion">
+        <option value="suma">Suma</option>
+        <option value="resta">Resta</option>
+        <option value="division">División</option>
+        <option value="multiplicacion">Multiplicación</option>
+    </select>
+    <br><br>
+    <input type="number" id="numero1" placeholder="Primer número">
+    <input type="number" id="numero2" placeholder="Segundo número">
+    <br><br>
+    <button onclick="calcularOperacion()">Calcular</button>
+    <p id="resultadoCalculadora">Resultado aquí</p>
+
+    <h2>Nombre completo</h2>
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="apellido" placeholder="Apellido">
+    <br><br>
+    <button onclick="mostrarNombreCompleto()">Mostrar nombre completo</button>
+    <p id="nombreCompleto">Tu nombre completo es: </p>
+
+    <h2>Tipos de datos</h2>
+    <button onclick="mostrarTiposDeDatos()">Mostrar tipos de datos</button>
+    <p id="tipoDeDatos"></p>
+
+    <h2>Objeto</h2>
+    <button onclick="mostrarObjeto()">Mostrar objeto</button>
+    <p id="detallesObjeto"></p>
+
+    <h2>Suma de múltiplos de 3 y 5</h2>
+    <input type="number" id="numeroMultiplos" placeholder="Número">
+    <br><br>
+    <button onclick="sumarMultiplos()">Calcular suma</button>
+    <p id="resultadoMultiplos">Resultado aquí</p>
+
+    <script>
+        // Función de calculadora
+        function calcularOperacion() {
+            const operacion = document.getElementById("operacion").value;
+            const num1 = parseFloat(document.getElementById("numero1").value);
+            const num2 = parseFloat(document.getElementById("numero2").value);
+            let resultado = 0;
+
+            switch (operacion) {
+                case "suma":
+                    resultado = num1 + num2;
+                    break;
+                case "resta":
+                    resultado = num1 - num2;
+                    break;
+                case "division":
+                    resultado = num1 / num2;
+                    break;
+                case "multiplicacion":
+                    resultado = num1 * num2;
+                    break;
+                default:
+                    resultado = "Operación no válida";
+            }
+
+            document.getElementById("resultadoCalculadora").innerText = "Resultado: " + resultado;
+        }
+
+        // Mostrar nombre completo
+        function mostrarNombreCompleto() {
+            const nombre = document.getElementById("nombre").value;
+            const apellido = document.getElementById("apellido").value;
+            document.getElementById("nombreCompleto").innerText = `Tu nombre completo es: ${nombre} ${apellido}`;
+        }
+
+        // Mostrar tipos de datos
+        function mostrarTiposDeDatos() {
+            const nombre = "Fabiana";
+            const edad = 21;
+            document.getElementById("tipoDeDatos").innerText = `Nombre: ${nombre}, Tipo de dato: ${typeof nombre}\nEdad: ${edad}, Tipo de dato: ${typeof edad}`;
+        }
+
+        // Mostrar objeto
+        function mostrarObjeto() {
+            const miObjeto = {
+                numero: 7,
+                texto: "Hola profe jeje",
+                booleano: true,
+                objetoVacio: {}
+            };
+            document.getElementById("detallesObjeto").innerText = 
+                `Número: ${miObjeto.numero}, Texto: ${miObjeto.texto}, Booleano: ${miObjeto.booleano}, Objeto vacío: ${JSON.stringify(miObjeto.objetoVacio)}`;
+        }
+
+        // Función para sumar múltiplos de 3 o 5
+        function sumarMultiplos() {
+            const numero = parseInt(document.getElementById("numeroMultiplos").value);
+            let suma = 0;
+
+            for (let i = 1; i < numero; i++) {
+                if (i % 3 === 0 || i % 5 === 0) {
+                    suma += i;
+                }
+            }
+
+            document.getElementById("resultadoMultiplos").innerText = "Total de la suma: " + suma;
+        }
+    </script>
+</body>
+</html>
+
