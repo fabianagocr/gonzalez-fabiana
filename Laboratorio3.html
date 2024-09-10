@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Laboratorio 3</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Laboratorio 3</h1>
+
+    <h2>Problema 1: Palíndromo de doble base</h2>
+    <input type="text" id="palindromoInput">
+    <button onclick="verificarPalindromo()">Verificar Palíndromo</button>
+    <p id="palindromoResultado"></p>
+
+    <h2>Problema 2: Conteo de caracteres</h2>
+    <input type="text" id="cadenaInput">
+    <button onclick="contarCaracteres()">Contar Caracteres</button>
+    <p id="caracteresResultado"></p>
+
+    <h2>Problema 3: Año bisiesto</h2>
+    <input type="number" id="anioInput">
+    <button onclick="verificarBisiesto()">Verificar año bisiesto</button>
+    <p id="bisiestoResultado"></p>
+
+    <h2>Problema 4: Suma de primos</h2>
+    <input type="number" id="numeroInput">
+    <button onclick="calcularSumaPrimos()">Calcular Sumatoria</button>
+    <p id="sumaPrimosResultado"></p>
+
+    <script>
+        function isPalindrome(num) {
+            return num.toString() === num.toString().split('').reverse().join('');
+        }
+
+        function isDoubleBasePalindrome(t) {
+            const num = parseInt(t);
+            return isPalindrome(num) && isPalindrome(num.toString(2));
+        }
+
+        function verificarPalindromo() {
+            const cadena = document.getElementById('palindromoInput').value;
+            const esPalindromo = isDoubleBasePalindrome(cadena);
+            document.getElementById('palindromoResultado').textContent = esPalindromo ? "El número es un palíndromo de doble base" : "El número no es un palíndromo de doble base";
+        }
+
+        function contarCaracteres() {
+            const cadena = document.getElementById('cadenaInput').value;
+            const contador = {};
+            for (const char of cadena) {
+                contador[char] = (contador[char] || 0) + 1;
+            }
+            let resultado = "Ha ingresado: ";
+            for (const char in contador) {
+                resultado += `${char}: ${contador[char]} veces, `;
+            }
+            document.getElementById('caracteresResultado').textContent = resultado;
+        }
+
+        function verificarBisiesto() {
+            const anio = parseInt(document.getElementById('anioInput').value);
+            const esBisiesto = (anio % 4 === 0 && anio % 100 !== 0) || (anio % 400 === 0);
+            document.getElementById('bisiestoResultado').textContent = esBisiesto ? "El año es bisiesto" : "El año no es bisiesto";
+        }
+
+        function calcularSumaPrimos() {
+            const n = parseInt(document.getElementById('numeroInput').value);
+            if (n <= 0 || n >= 1000000) {
+                document.getElementById('sumaPrimosResultado').textContent = "Por favor, ingrese un número entre 1 y 999999";
+                return;
+            }
+
+            const isPrime = new Array(n + 1).fill(true);
+            isPrime[0] = false; 
+            isPrime[1] = true; 
+
+            for (let i = 2; i * i <= n; i++) {
+                if (isPrime[i]) {
+                    for (let j = i * i; j <= n; j += i) {
+                        isPrime[j] = false;
+                    }
+                }
+            }
+
+            let suma = 0;
+            for (let i = 1; i <= n; i++) { 
+                if (isPrime[i]) {
+                    suma += i;
+                }
+            }
+
+            document.getElementById('sumaPrimosResultado').textContent = `La sumatoria de los números primos hasta ${n} es: ${suma}`;
+        }
+    </script>
+</body>
+</html>
+
