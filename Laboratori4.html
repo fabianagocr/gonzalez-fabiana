@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><Laboratorio id="4"></Laboratorio></title>
+</head>
+<body>
+    <input type="text" id="myInput">
+    <span id="result"></span>
+
+    <script>
+        const input = document.getElementById('myInput');
+        const result = document.getElementById('result');
+
+        input.addEventListener('input', () => {
+            result.textContent = input.value.split('').reverse().join('');
+        });
+    </script>
+</body>
+</html>
